@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body >
+    <div class="wrapper">
+        
+        <header>Todo App</header>
+        
+        <span class="dateToday"><%= helper.getDay(new Date().getDay())%> <%= new Date().toISOString().slice(0,10) %></span>
+        
+        <form action="/" method="post" class="inputField">
+                <input type="text" name="todovalue" id="todovalue" placeholder="Add your todo" required>
+                <input type="date" name="dueDate" id="dueDate" placeholder="Date" required >
+                <button class="submitButton" type="submit"><i class="fas fa-plus"></i></button>
+        </form>
+        
+        <ul class="todoList">
+            <%- include('_showdata.ejs') %>
+        </ul>
+        
+        <div class="footer">
+          <span>You have <span class="pendingTasks"><%=data.length%></span> pending tasks</span>
+        </div>
+
+    </div>
+    <script>
+        const deleteButton=document.querySelectorAll('.todo-delete')
+            deleteButton.forEach((button,i)=>{
+            button.addEventListener('click',()=>{
+                const endpoint=`/${button.classList[2]}`;
+                console.log(button);
+                fetch(endpoint,{
+                    method:"DELETE"
+                })
+                window.location.href="/"
+            })
+        })
+
+    </script>
+</body>
+</html>

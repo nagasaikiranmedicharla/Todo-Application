@@ -1,0 +1,10 @@
+<%if(data.length>0){%>
+        <% for(let i=0; i < data.length; i++) { %>
+        <li data-id=<%= data[i].createdAt.toISOString() %> ><%= data[i].todo %><a class="icon todo-delete <%=data[i].id%>"><i class="fa fa-trash"></i></a>
+        </li>
+        
+        <span class="hide"><%= `${data[i].todo} was created on ${data[i].createdAt.toISOString().slice(0,10)} , You have ${helper.getTimeDifference(data[i].dueDate)} days left to complete this task` %> </span>
+        <% } %>
+<%}else{%>
+       <h1 class="headertext">Hope your day is going great</h1> 
+    <%}%>
